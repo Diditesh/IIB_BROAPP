@@ -1,0 +1,68 @@
+  
+
+CREATE COMPUTE MODULE broflow_Compute
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- CALL CopyEntireMessage();
+		-- SET OutputRoot = InputRoot;
+		
+		DECLARE vpercentage INTEGER;
+		SET vpercentage = CAST(InputRoot.XLMNSC.Student.Percentage AS INT);
+		DECLARE Course INTEGER;
+		SET Course = InputRoot.XLMNSC.Student.Course;
+		IF (vpercentage > 85) THEN 
+			-- Send this Student record to Amazon as Employee Record 
+			SET OutputRoot.XMLNSC.Employee.Status   = 'Eligible';
+		ELSE 
+		-- Do not Send Not Eligible to Amazon 
+		-- But send Email for further communications.
+		IF (Course='IT') THEN
+	        SET OutputRoot.XMLNSC.Employee.Status   = ' Not Eligible';
+		ELSE 
+			SET OutputRoot.XMLNSC.Employee.Status   = ' Not Qualified';
+		END IF; 
+			
+	END IF; 
+		
+		
+--        
+--SET OutputRoot.Properties = InputRoot.Properties;
+--		SET OutputRoot.MQMD = InputRoot.MQMD;
+--		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+--		SET OutputRoot.XMLNSC.Employee.EmpId = InputRoot.XMLNSC.Student.Id;
+--		SET OutputRoot.XMLNSC.Employee.Names.Firstname = InputRoot.XMLNSC.Student.Firstname;
+--		SET OutputRoot.XMLNSC.Employee.Names.Lastname = InputRoot.XMLNSC.Student.Lastname;
+--		SET OutputRoot.XMLNSC.Employee.DOB = InputRoot.XMLNSC.Student.DateofBirth;
+--		SET OutputRoot.XMLNSC.Employee.Phonenumber = InputRoot.XMLNSC.Student.Contact;
+		-- SET OutputRoot.XMLNSC.Employee = InputRoot.XMLNSC.Student;
+		RETURN TRUE;
+	END;
+
+	
+	 
+	
+	
+	
+	
+	
+	
+	
+	CREATE PROCEDURE CopyMessageHeaders()
+	BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage()
+	BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+	
+END MODULE;
