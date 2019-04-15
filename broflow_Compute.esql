@@ -27,7 +27,7 @@ CREATE COMPUTE MODULE broflow_Compute
 	END IF; 
 		
 		
---        
+    
 --SET OutputRoot.Properties = InputRoot.Properties;
 --		SET OutputRoot.MQMD = InputRoot.MQMD;
 --		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
@@ -36,7 +36,7 @@ CREATE COMPUTE MODULE broflow_Compute
 --		SET OutputRoot.XMLNSC.Employee.Names.Lastname = InputRoot.XMLNSC.Student.Lastname;
 --		SET OutputRoot.XMLNSC.Employee.DOB = InputRoot.XMLNSC.Student.DateofBirth;
 --		SET OutputRoot.XMLNSC.Employee.Phonenumber = InputRoot.XMLNSC.Student.Contact;
-		-- SET OutputRoot.XMLNSC.Employee = InputRoot.XMLNSC.Student;
+	    SET OutputRoot.XMLNSC.Employee = InputRoot.XMLNSC.Student;
 		RETURN TRUE;
 	END;
 
