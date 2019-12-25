@@ -21,7 +21,7 @@ CREATE COMPUTE MODULE broflow_Compute
 		IF (Course='IT') THEN
 	        SET OutputRoot.XMLNSC.Employee.Status   = ' Not Eligible';
 		ELSE 
-			SET OutputRoot.XMLNSC.Employee.Status   = ' Not Qualified';
+			SET OutputRoot.XMLNSC.Employee.Status   = ' Not aquired';
 		END IF; 
 			
 	END IF; 
